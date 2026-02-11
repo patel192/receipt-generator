@@ -30,10 +30,10 @@ export default function Receipt({ data }) {
     academyConfig[data?.academy] || academyConfig["vsa"];
 
   // =========================
-  // PRINT HANDLER (v3 FIXED)
+  // PRINT HANDLER
   // =========================
   const handlePrint = useReactToPrint({
-    contentRef: receiptRef, // ✅ NEW v3 SYNTAX
+    contentRef: receiptRef,
     documentTitle: `receipt-${data?.receiptNo || "file"}`,
   });
 
@@ -44,22 +44,22 @@ export default function Receipt({ data }) {
       ========================= */}
       <div
         ref={receiptRef}
-        className="bg-white text-black rounded-2xl shadow-2xl p-6 md:p-12 mt-10 print:shadow-none"
+        className="print-container bg-white text-black rounded-xl shadow-xl p-4 md:p-8 mt-6 max-w-4xl mx-auto"
       >
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row items-center justify-between border-b pb-6 gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between border-b pb-4 gap-4">
           <div className="flex items-center gap-4">
             <img
               src={selectedAcademy.logo}
               alt="logo"
-              className="w-16 md:w-20"
+              className="w-14 md:w-16"
             />
-            <h1 className="text-2xl md:text-3xl font-bold">
+            <h1 className="text-xl md:text-2xl font-bold">
               {selectedAcademy.name}
             </h1>
           </div>
 
-          <div className="text-lg text-gray-700 text-right">
+          <div className="text-base text-gray-700 text-right">
             <p><b>Receipt No:</b> {data.receiptNo}</p>
             <p><b>Arrive:</b> {data.arrive}</p>
             <p><b>Depart:</b> {data.depart}</p>
@@ -67,31 +67,31 @@ export default function Receipt({ data }) {
         </div>
 
         {/* BILLING */}
-        <div className="mt-6 text-lg">
+        <div className="mt-4 text-base">
           <p className="font-semibold">Billed To:</p>
           <p className="text-gray-700 font-medium">{data.billedTo}</p>
 
-          <p className="font-semibold mt-2">Address:</p>
+          <p className="font-semibold mt-1">Address:</p>
           <p className="text-gray-700">{data.address}</p>
         </div>
 
         {/* TABLE */}
-        <div className="mt-8 overflow-x-auto">
-          <table className="w-full text-sm border border-gray-200">
+        <div className="mt-6">
+          <table className="w-full text-sm border border-gray-300">
             <thead className="bg-gray-100">
-              <tr className="text-lg">
-                <th className="p-3 text-left">Month</th>
-                <th className="p-3 text-left">Registration Fees</th>
-                <th className="p-3 text-left">Regular Fees</th>
-                <th className="p-3 text-right">Total</th>
+              <tr className="text-base">
+                <th className="p-2 text-left">Month</th>
+                <th className="p-2 text-left">Registration Fees</th>
+                <th className="p-2 text-left">Regular Fees</th>
+                <th className="p-2 text-right">Total</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-t text-lg">
-                <td className="p-3">{data.month}</td>
-                <td className="p-3">{data.registrationFees}</td>
-                <td className="p-3">{data.regularFees}</td>
-                <td className="p-3 text-right font-semibold">
+              <tr className="border-t text-base">
+                <td className="p-2">{data.month}</td>
+                <td className="p-2">{data.registrationFees}</td>
+                <td className="p-2">{data.regularFees}</td>
+                <td className="p-2 text-right font-semibold">
                   {data.total}
                 </td>
               </tr>
@@ -100,25 +100,25 @@ export default function Receipt({ data }) {
         </div>
 
         {/* BOTTOM */}
-        <div className="flex flex-col md:flex-row justify-between mt-10 gap-8">
-          <div className="space-y-2 text-lg">
+        <div className="flex flex-col md:flex-row justify-between mt-6 gap-6">
+          <div className="space-y-1 text-base">
             <p><b>Payment Method:</b> {data.paymentMethod}</p>
             <p><b>Transaction ID:</b> {data.transactionId}</p>
             <p><b>Student Name:</b> {data.studentName}</p>
           </div>
 
-          <div className="bg-gray-100 rounded-xl p-6 w-full md:w-80">
-            <div className="flex justify-between text-lg mb-2">
+          <div className="bg-gray-100 rounded-lg p-4 w-full md:w-72">
+            <div className="flex justify-between text-base mb-1">
               <span>Sub Total</span>
               <span>{data.subTotal}</span>
             </div>
 
-            <div className="flex justify-between text-lg mb-2">
+            <div className="flex justify-between text-base mb-1">
               <span>Discount</span>
               <span>{data.discount}</span>
             </div>
 
-            <div className="flex justify-between text-lg font-bold border-t pt-2">
+            <div className="flex justify-between text-base font-bold border-t pt-1">
               <span>Total</span>
               <span>{data.finalTotal}</span>
             </div>
@@ -126,7 +126,7 @@ export default function Receipt({ data }) {
         </div>
 
         {/* FOOTER */}
-        <div className="mt-12 border-t pt-6 text-lg text-gray-600">
+        <div className="mt-8 border-t pt-4 text-base text-gray-600">
           <h4>{selectedAcademy.name}</h4>
           <h4>
             Fees once paid are non-refundable. Please keep this receipt for future reference.
@@ -134,13 +134,13 @@ export default function Receipt({ data }) {
           <h4>Instagram: {selectedAcademy.instagram}</h4>
           <p>This is a computer-generated receipt.</p>
 
-          <div className="text-right mt-10">
+          <div className="text-right mt-6">
             <img
               src={signature}
               alt="signature"
-              className="w-60 ml-auto"
+              className="w-44 ml-auto"
             />
-            <p className="font-semibold mt-2">
+            <p className="font-semibold mt-1">
               {selectedAcademy.manager}
             </p>
             <p>Manager</p>
@@ -149,10 +149,10 @@ export default function Receipt({ data }) {
       </div>
 
       {/* PDF BUTTON */}
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-end mt-6 no-print">
         <button
           onClick={handlePrint}
-          className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition"
+          className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
         >
           Download PDF
         </button>
