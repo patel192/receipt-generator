@@ -26,8 +26,7 @@ export default function Receipt({ data }) {
     },
   };
 
-  const selectedAcademy =
-    academyConfig[data?.academy] || academyConfig["vsa"];
+  const selectedAcademy = academyConfig[data?.academy] || academyConfig["vsa"];
 
   // =========================
   // PRINT HANDLER
@@ -60,19 +59,29 @@ export default function Receipt({ data }) {
           </div>
 
           <div className="text-base text-gray-700 text-right">
-            <p><b>Receipt No:</b> {data.receiptNo}</p>
-            <p><b>Arrive:</b> {data.arrive}</p>
-            <p><b>Depart:</b> {data.depart}</p>
+            <p>
+              <b>Receipt No:</b> {data.receiptNo}
+            </p>
+            <p>
+              <b>Arrive:</b> {data.arrive}
+            </p>
+            <p>
+              <b>Depart:</b> {data.depart}
+            </p>
           </div>
         </div>
 
         {/* BILLING */}
         <div className="mt-4 text-base">
-          <p className="font-semibold">Billed To:</p>
-          <p className="text-gray-700 font-medium">{data.billedTo}</p>
+          <p className="font-bold">
+            Billed To:
+            <span className="text-gray-700 font-medium">  {data.billedTo}</span>
+          </p>
 
-          <p className="font-semibold mt-1">Address:</p>
-          <p className="text-gray-700">{data.address}</p>
+          <p className="font-bold mt-1">
+            Address: 
+            <span className="text-gray-700 font-medium">  {data.address}</span>
+          </p>
         </div>
 
         {/* TABLE */}
@@ -91,9 +100,7 @@ export default function Receipt({ data }) {
                 <td className="p-2">{data.month}</td>
                 <td className="p-2">{data.registrationFees}</td>
                 <td className="p-2">{data.regularFees}</td>
-                <td className="p-2 text-right font-semibold">
-                  {data.total}
-                </td>
+                <td className="p-2 text-right font-semibold">{data.total}</td>
               </tr>
             </tbody>
           </table>
@@ -102,9 +109,15 @@ export default function Receipt({ data }) {
         {/* BOTTOM */}
         <div className="flex flex-col md:flex-row justify-between mt-6 gap-6">
           <div className="space-y-1 text-base">
-            <p><b>Payment Method:</b> {data.paymentMethod}</p>
-            <p><b>Transaction ID:</b> {data.transactionId}</p>
-            <p><b>Student Name:</b> {data.studentName}</p>
+            <p>
+              <b>Payment Method:</b> {data.paymentMethod}
+            </p>
+            <p>
+              <b>Transaction ID:</b> {data.transactionId}
+            </p>
+            <p>
+              <b>Student Name:</b> {data.studentName}
+            </p>
           </div>
 
           <div className="bg-gray-100 rounded-lg p-4 w-full md:w-72">
@@ -129,20 +142,15 @@ export default function Receipt({ data }) {
         <div className="mt-8 border-t pt-4 text-base text-gray-600">
           <h4>{selectedAcademy.name}</h4>
           <h4>
-            Fees once paid are non-refundable. Please keep this receipt for future reference.
+            Fees once paid are non-refundable. Please keep this receipt for
+            future reference.
           </h4>
           <h4>Instagram: {selectedAcademy.instagram}</h4>
           <p>This is a computer-generated receipt.</p>
 
           <div className="text-right mt-6">
-            <img
-              src={signature}
-              alt="signature"
-              className="w-44 ml-auto"
-            />
-            <p className="font-semibold mt-1">
-              {selectedAcademy.manager}
-            </p>
+            <img src={signature} alt="signature" className="w-44 ml-auto" />
+            <p className="font-semibold mt-1">{selectedAcademy.manager}</p>
             <p>Manager</p>
           </div>
         </div>
