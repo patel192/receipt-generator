@@ -51,7 +51,7 @@ export default function Receipt({ data }) {
             <img
               src={selectedAcademy.logo}
               alt="logo"
-              className="w-14 md:w-16"
+              className="w-22 md:w-24"
             />
             <h1 className="text-xl md:text-2xl font-bold">
               {selectedAcademy.name}
