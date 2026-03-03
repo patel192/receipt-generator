@@ -84,7 +84,7 @@ export default function Receipt({ data }) {
           </p>
         </div>
 
-        {/* TABLE */}
+        {/* TABLE **/}
         <div className="mt-6">
           <table className="w-full text-sm border border-gray-300">
             <thead className="bg-gray-100">
