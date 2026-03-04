@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function ReceiptForm({ setReceiptData }) {
+export default function ReceiptForm() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     academy: "vsa",
     receiptNo: "",
@@ -18,6 +21,7 @@ export default function ReceiptForm({ setReceiptData }) {
     subTotal: "",
     discount: "",
     finalTotal: "",
+    paymentStatus: "completed", // NEW FIELD
   });
 
   const handleChange = (e) => {
@@ -63,7 +67,7 @@ export default function ReceiptForm({ setReceiptData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setReceiptData(form);
+    navigate("/receipt", { state: form });
   };
 
   return (
@@ -76,7 +80,6 @@ export default function ReceiptForm({ setReceiptData }) {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 sm:grid-cols-2 gap-5"
       >
-
         {/* Academy */}
         <div className="sm:col-span-2">
           <label className="block text-sm font-medium mb-1">
@@ -159,7 +162,7 @@ export default function ReceiptForm({ setReceiptData }) {
           />
         </div>
 
-        {/* Auto Month */}
+        {/* Month */}
         <div className="sm:col-span-2">
           <label className="block text-sm font-medium mb-1">
             Month Period
@@ -245,6 +248,22 @@ export default function ReceiptForm({ setReceiptData }) {
           />
         </div>
 
+        {/* NEW PAYMENT STATUS */}
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Payment Status
+          </label>
+          <select
+            name="paymentStatus"
+            value={form.paymentStatus}
+            onChange={handleChange}
+            className="input"
+          >
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+
         {/* Payment Details */}
         <div>
           <label className="block text-sm font-medium mb-1">
@@ -288,7 +307,6 @@ export default function ReceiptForm({ setReceiptData }) {
         >
           Generate Receipt
         </button>
-
       </form>
     </div>
   );

@@ -8,9 +8,6 @@ import signature from "../assets/signature.png";
 export default function Receipt({ data }) {
   const receiptRef = useRef(null);
 
-  // =========================
-  // ACADEMY CONFIG
-  // =========================
   const academyConfig = {
     vsa: {
       name: "Vadodara Sports Academia",
@@ -26,11 +23,9 @@ export default function Receipt({ data }) {
     },
   };
 
-  const selectedAcademy = academyConfig[data?.academy] || academyConfig["vsa"];
+  const selectedAcademy =
+    academyConfig[data?.academy] || academyConfig["vsa"];
 
-  // =========================
-  // PRINT HANDLER
-  // =========================
   const handlePrint = useReactToPrint({
     contentRef: receiptRef,
     documentTitle: `receipt-${data?.receiptNo || "file"}`,
@@ -38,9 +33,6 @@ export default function Receipt({ data }) {
 
   return (
     <>
-      {/* =========================
-          RECEIPT CONTENT
-      ========================= */}
       <div
         ref={receiptRef}
         className="print-container bg-white text-black rounded-xl shadow-xl p-4 md:p-8 mt-6 max-w-4xl mx-auto"
@@ -75,16 +67,22 @@ export default function Receipt({ data }) {
         <div className="mt-4 text-base">
           <p className="font-bold">
             Billed To:
-            <span className="text-gray-700 font-medium">  {data.billedTo}</span>
+            <span className="text-gray-700 font-medium">
+              {" "}
+              {data.billedTo}
+            </span>
           </p>
 
           <p className="font-bold mt-1">
-            Address: 
-            <span className="text-gray-700 font-medium">  {data.address}</span>
+            Address:
+            <span className="text-gray-700 font-medium">
+              {" "}
+              {data.address}
+            </span>
           </p>
         </div>
 
-        {/* TABLE **/}
+        {/* TABLE */}
         <div className="mt-6">
           <table className="w-full text-sm border border-gray-300">
             <thead className="bg-gray-100">
@@ -100,7 +98,9 @@ export default function Receipt({ data }) {
                 <td className="p-2">{data.month}</td>
                 <td className="p-2">{data.registrationFees}</td>
                 <td className="p-2">{data.regularFees}</td>
-                <td className="p-2 text-right font-semibold">{data.total}</td>
+                <td className="p-2 text-right font-semibold">
+                  {data.total}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -112,11 +112,27 @@ export default function Receipt({ data }) {
             <p>
               <b>Payment Method:</b> {data.paymentMethod}
             </p>
+
             <p>
               <b>Transaction ID:</b> {data.transactionId}
             </p>
+
             <p>
               <b>Student Name:</b> {data.studentName}
+            </p>
+
+            {/* NEW PAYMENT STATUS */}
+            <p>
+              <b>Status:</b>{" "}
+              {data.paymentStatus === "pending" ? (
+                <span className="text-red-600 font-semibold">
+                  Pending
+                </span>
+              ) : (
+                <span className="text-green-600 font-semibold">
+                  Completed
+                </span>
+              )}
             </p>
           </div>
 
@@ -142,8 +158,8 @@ export default function Receipt({ data }) {
         <div className="mt-8 border-t pt-4 text-base text-gray-600">
           <h4>{selectedAcademy.name}</h4>
           <h4>
-            Fees once paid are non-refundable. Please keep this receipt for
-            future reference.
+            Fees once paid are non-refundable. Please keep this receipt
+            for future reference.
           </h4>
           <h4>Instagram: {selectedAcademy.instagram}</h4>
           <p>This is a computer-generated receipt.</p>
