@@ -23,8 +23,7 @@ export default function Receipt({ data }) {
     },
   };
 
-  const selectedAcademy =
-    academyConfig[data?.academy] || academyConfig["vsa"];
+  const selectedAcademy = academyConfig[data?.academy] || academyConfig["vsa"];
 
   const handlePrint = useReactToPrint({
     contentRef: receiptRef,
@@ -67,18 +66,16 @@ export default function Receipt({ data }) {
         <div className="mt-4 text-base">
           <p className="font-bold">
             Billed To:
-            <span className="text-gray-700 font-medium">
-              {" "}
-              {data.billedTo}
-            </span>
+            <span className="text-gray-700 font-medium"> {data.billedTo}</span>
           </p>
 
           <p className="font-bold mt-1">
             Address:
-            <span className="text-gray-700 font-medium">
-              {" "}
-              {data.address}
-            </span>
+            <span className="text-gray-700 font-medium"> {data.address}</span>
+          </p>
+          <p className="font-bold mt-1">
+            Branch:
+            <span className="text-gray-700 font-medium"> {data.branch}</span>
           </p>
         </div>
 
@@ -98,9 +95,7 @@ export default function Receipt({ data }) {
                 <td className="p-2">{data.month}</td>
                 <td className="p-2">{data.registrationFees}</td>
                 <td className="p-2">{data.regularFees}</td>
-                <td className="p-2 text-right font-semibold">
-                  {data.total}
-                </td>
+                <td className="p-2 text-right font-semibold">{data.total}</td>
               </tr>
             </tbody>
           </table>
@@ -125,13 +120,9 @@ export default function Receipt({ data }) {
             <p>
               <b>Status:</b>{" "}
               {data.paymentStatus === "pending" ? (
-                <span className="text-red-600 font-semibold">
-                  Pending
-                </span>
+                <span className="text-red-600 font-semibold">Pending</span>
               ) : (
-                <span className="text-green-600 font-semibold">
-                  Completed
-                </span>
+                <span className="text-green-600 font-semibold">Completed</span>
               )}
             </p>
           </div>
@@ -158,8 +149,8 @@ export default function Receipt({ data }) {
         <div className="mt-8 border-t pt-4 text-base text-gray-600">
           <h4>{selectedAcademy.name}</h4>
           <h4>
-            Fees once paid are non-refundable. Please keep this receipt
-            for future reference.
+            Fees once paid are non-refundable. Please keep this receipt for
+            future reference.
           </h4>
           <h4>Instagram: {selectedAcademy.instagram}</h4>
           <p>This is a computer-generated receipt.</p>

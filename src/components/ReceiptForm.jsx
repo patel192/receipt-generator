@@ -6,6 +6,7 @@ export default function ReceiptForm() {
 
   const [form, setForm] = useState({
     academy: "vsa",
+    branch: "", // NEW
     receiptNo: "",
     billedTo: "",
     address: "",
@@ -21,11 +22,21 @@ export default function ReceiptForm() {
     subTotal: "",
     discount: "",
     finalTotal: "",
-    paymentStatus: "completed", // NEW FIELD
+    paymentStatus: "completed",
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "academy") {
+      setForm({
+        ...form,
+        academy: value,
+        branch: "", // reset branch when academy changes
+      });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   // AUTO CALCULATIONS
@@ -69,12 +80,19 @@ export default function ReceiptForm() {
     e.preventDefault();
     navigate("/receipt", { state: form });
   };
-
+  const branchesByAcademy = {
+    vsa: [
+      "VSA TARSAALI",
+      "VSA NIZAMPURA",
+      "VSA BHAYLI",
+      "VSA NYSA",
+      "VSA RANG ANGEL",
+    ],
+    dbfa: ["DBSC APS TARSAALI", "DBSC RANG ANGEL ATLADRA"],
+  };
   return (
     <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6">
-        Generate Receipt
-      </h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-6">Generate Receipt</h2>
 
       <form
         onSubmit={handleSubmit}
@@ -95,7 +113,28 @@ export default function ReceiptForm() {
             <option value="dbfa">Dwivedi Brother Football Academy</option>
           </select>
         </div>
+        {/* Branch */}
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium mb-1">
+            Select Branch
+          </label>
 
+          <select
+            name="branch"
+            value={form.branch}
+            onChange={handleChange}
+            className="input"
+            required
+          >
+            <option value="">Select Branch</option>
+
+            {branchesByAcademy[form.academy]?.map((branch) => (
+              <option key={branch} value={branch}>
+                {branch}
+              </option>
+            ))}
+          </select>
+        </div>
         {/* Receipt No */}
         <div>
           <label className="block text-sm font-medium mb-1">
@@ -111,9 +150,7 @@ export default function ReceiptForm() {
 
         {/* Billed To */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Billed To
-          </label>
+          <label className="block text-sm font-medium mb-1">Billed To</label>
           <input
             name="billedTo"
             value={form.billedTo}
@@ -124,9 +161,7 @@ export default function ReceiptForm() {
 
         {/* Address */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium mb-1">
-            Address
-          </label>
+          <label className="block text-sm font-medium mb-1">Address</label>
           <input
             name="address"
             value={form.address}
@@ -137,9 +172,7 @@ export default function ReceiptForm() {
 
         {/* Dates */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Arrive Date
-          </label>
+          <label className="block text-sm font-medium mb-1">Arrive Date</label>
           <input
             type="date"
             name="arrive"
@@ -150,9 +183,7 @@ export default function ReceiptForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Depart Date
-          </label>
+          <label className="block text-sm font-medium mb-1">Depart Date</label>
           <input
             type="date"
             name="depart"
@@ -164,14 +195,8 @@ export default function ReceiptForm() {
 
         {/* Month */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium mb-1">
-            Month Period
-          </label>
-          <input
-            value={form.month}
-            readOnly
-            className="input bg-gray-100"
-          />
+          <label className="block text-sm font-medium mb-1">Month Period</label>
+          <input value={form.month} readOnly className="input bg-gray-100" />
         </div>
 
         {/* Fees */}
@@ -189,9 +214,7 @@ export default function ReceiptForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Regular Fees
-          </label>
+          <label className="block text-sm font-medium mb-1">Regular Fees</label>
           <input
             type="number"
             name="regularFees"
@@ -203,20 +226,12 @@ export default function ReceiptForm() {
 
         {/* Totals */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Total
-          </label>
-          <input
-            value={form.total}
-            readOnly
-            className="input bg-gray-100"
-          />
+          <label className="block text-sm font-medium mb-1">Total</label>
+          <input value={form.total} readOnly className="input bg-gray-100" />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Discount
-          </label>
+          <label className="block text-sm font-medium mb-1">Discount</label>
           <input
             type="number"
             name="discount"
@@ -227,20 +242,12 @@ export default function ReceiptForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Sub Total
-          </label>
-          <input
-            value={form.subTotal}
-            readOnly
-            className="input bg-gray-100"
-          />
+          <label className="block text-sm font-medium mb-1">Sub Total</label>
+          <input value={form.subTotal} readOnly className="input bg-gray-100" />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Final Total
-          </label>
+          <label className="block text-sm font-medium mb-1">Final Total</label>
           <input
             value={form.finalTotal}
             readOnly
@@ -290,9 +297,7 @@ export default function ReceiptForm() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium mb-1">
-            Student Name
-          </label>
+          <label className="block text-sm font-medium mb-1">Student Name</label>
           <input
             name="studentName"
             value={form.studentName}
