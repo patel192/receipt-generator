@@ -28,6 +28,32 @@ export default function Receipt({ data }) {
   const handlePrint = useReactToPrint({
     contentRef: receiptRef,
     documentTitle: `receipt-${data?.receiptNo || "file"}`,
+
+    pageStyle: `
+    @page {
+      size: tabloid portrait;
+      margin: 10mm;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-container {
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+        margin: 0;
+        padding: 10mm;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  `,
   });
 
   return (
