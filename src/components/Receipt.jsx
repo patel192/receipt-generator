@@ -34,7 +34,7 @@ export default function Receipt({ data }) {
     <>
       <div
         ref={receiptRef}
-        className="print-container bg-white text-black rounded-xl shadow-xl p-4 md:p-8 mt-6 max-w-4xl mx-auto"
+        className="print-container bg-white text-black rounded-xl shadow-xl p-2 md:p-8 mt-6 max-w-4xl mx-auto"
       >
         {/* HEADER */}
         <div className="flex flex-col md:flex-row items-center justify-between border-b pb-4 gap-4">
