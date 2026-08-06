@@ -87,7 +87,8 @@ export default function ReceiptForm() {
       "VSA BHAYLI",
       "VSA NYSA",
       "VSA RANG ANGEL",
-      "VSA CHAMP KID"
+      "VSA CHAMP KID",
+      "VSA ATLADARA",
     ],
     dbfa: ["DBSC APS TARSAALI", "DBSC RANG ANGEL ATLADRA",  "DBSC Hoppers"],
   };
